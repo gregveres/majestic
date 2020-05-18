@@ -28,6 +28,10 @@ const Container = styled.div<any>`
 const Content = styled.div`
   overflow: auto;
   height: calc(100vh - 118px);
+
+  ${({ dim }: any) => dim && `
+  opacity: .5;
+  `}
 `;
 
 const TestItemsContainer = styled.div`
@@ -127,7 +131,7 @@ function TestFile({ selectedFilePath, isRunning, projectRoot, onStop }: Props) {
           updateSnapshot();
         }}
       />
-      <Content>
+      <Content dim={isUpdating}>
         {result && result.testResults && result.testResults.length === 0 && (
           <ErrorPanel failureMessage={result && result.failureMessage} />
         )}
